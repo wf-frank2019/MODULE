@@ -1,2 +1,2 @@
-# MODULE
-NSCLC PPIN MODULE DETECTION
+# MODULE DETECTION
+Topological-Functional Connection In NSCLC Protein-Protein Interaction Network 
