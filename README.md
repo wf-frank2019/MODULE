@@ -1,25 +1,22 @@
 # COMMUNITY DETECTION
 Random Walk and Topological-Functional Connection for NSCLC Protein-Protein Interaction Network 
 
-## 一 Overall Flow
+## 一 Overall Presentation
 ### 1 Preliminary omics research
+	GSE19804 & GSE101929 (94 NSCLCs vs 92 normal samples) 
+   DEGs were identified respectively(as shown:)
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/huoshan1.PNG "VolcanoPlot")
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/huoshan2.PNG "VolcanoPlot")
-### 2 Plot 
-    B
+### 2 PPIN Construction
+	Protein-protein interaction network based on STRING(https://string-db.org/)
+   DEGs include 12 known genes from KEGG(https://www.kegg.jp/kegg/),COSMIC(https://cancer.sanger.ac.uk/cosmic/),DisGenet(https://www.disgenet.org/)
+   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/PrimaryPPIN.PNG "PPIN")
+   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/keyNet.PNG "PPIN")
     
-### 3
-    C
+### 3 Communities
+   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/community.PNG "Module")
     
 ### 4
-    D
 
-## 二 Results Presentation
-### 1 
-    A
-### 2
-    B
-### 3
-    C
-### 4
-    D
+## 二  
+### 
