@@ -11,10 +11,10 @@ Random Walk and Topological-Functional Connection for NSCLC Protein-Protein Inte
 	Protein-protein interaction network based on STRING(https://string-db.org/)
    	DEGs include 12 known genes from KEGG(https://www.kegg.jp/kegg/),COSMIC(https://cancer.sanger.ac.uk/cosmic/),DisGenet(https://www.disgenet.org/)
 	KeyNetwork：nodes and edges are weighted by RWRscore and TFscore respectively
-<figure class="half">
+<center class="half">
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/PrimaryPPIN.PNG "PPIN")
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/keyNet.PNG "PPIN")
-</figure>
+</center>
 
 ### 3 Communities
 	Communities are detected by GN_LPA Model
