@@ -5,10 +5,8 @@ Random Walk and Topological-Functional Connection for NSCLC Protein-Protein Inte
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/Outline1.png "Outline")
 ### 1 Preliminary omics research
 	GSE19804 & GSE101929 (94 NSCLCs vs 92 normal samples)
-   	DEGs were identified respectively(as shown:)
-[^_^]:
-   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/huoshan1.PNG "VolcanoPlot")
-   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/huoshan2.PNG "VolcanoPlot")
+   	DEGs were identified respectively(588 common DEGs)
+
 ### 2 PPIN Construction
 	Protein-protein interaction network based on STRING(https://string-db.org/)
    	DEGs include 12 known genes from KEGG(https://www.kegg.jp/kegg/),COSMIC(https://cancer.sanger.ac.uk/cosmic/),DisGenet(https://www.disgenet.org/)
