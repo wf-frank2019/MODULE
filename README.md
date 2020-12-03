@@ -6,6 +6,7 @@ Random Walk and Topological-Functional Connection for NSCLC Protein-Protein Inte
 ### 1 Preliminary omics research
 	GSE19804 & GSE101929 (94 NSCLCs vs 92 normal samples)
    	DEGs were identified respectively(as shown:)
+[^_^]:
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/huoshan1.PNG "VolcanoPlot")
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/huoshan2.PNG "VolcanoPlot")
 ### 2 PPIN Construction
