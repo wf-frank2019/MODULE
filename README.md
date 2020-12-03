@@ -21,5 +21,6 @@ Random Walk and Topological-Functional Connection for NSCLC Protein-Protein Inte
     
 ### 4
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/ITGA12.PNG "central modeling")
-## 二  
+   
+## 二  Research Notes
 ### 
