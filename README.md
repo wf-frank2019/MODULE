@@ -1,5 +1,5 @@
 # COMMUNITY DETECTION
-Random Walk and Topological-Functional Connection for NSCLC Protein-Protein Interaction Network 
+The node and edge Prioritization based Community Analysis (ne-PCA) for NSCLC Protein-Protein Interaction Network 
 
 ## 一 Overall Presentation
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/Outline1.png "Outline")
