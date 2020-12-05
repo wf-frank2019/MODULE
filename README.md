@@ -13,14 +13,8 @@ The node and edge Prioritization based Community Analysis (ne-PCA) for NSCLC Pro
 	KeyNetwork：nodes and edges are weighted by RWRscore and TFscore respectively
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/git2.PNG "PPN_WCN")
 
-
-
 ### 3 Communities
 	Communities are detected by GN_LPA Model
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/community.PNG "Module")
-    
-### 4
-   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/ITGA12.PNG "central modeling")
-   
-## 二  Research Notes
-### 
+
+
