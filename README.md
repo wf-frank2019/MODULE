@@ -13,7 +13,7 @@ The node and edge Prioritization based Community Analysis (ne-PCA) for NSCLC Pro
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/seeds.PNG "Seeds")
 #### details:
 	DisGnet(http://www.disgenet.org/downloads) Pinero J, Ramirez-Anguita JM, Sauch-Pitarch J et al. The DisGeNET knowledge platform for disease genomics: 2019 update, NU-CLEIC ACIDS RESEARCH 2020.
-        KEGG(https://www.kegg.jp/kegg/)   Kanehisa M, Goto S. KEGG: kyoto encyclopedia of genes and genomes, NUCLEIC ACIDS RESEARCH 2000.
+	KEGG(https://www.kegg.jp/kegg/)   Kanehisa M, Goto S. KEGG: kyoto encyclopedia of genes and genomes, NUCLEIC ACIDS RESEARCH 2000.
 	Cancer Gene Census(https://cancer.sanger.ac.uk/census) Sondka,Z.,Bamford, S.,Cole,C.G.et al.The COSMIC Cancer Gene Census: describing genetic dysfunction across all human cancers, Nat Rev Cancer 2018.
 	OMIM(https://www.omim.org/downloads)  Amberger JS, Bocchini CA, Scott AF, Hamosh A. OMIM.org: leveraging knowledge across phenotype-gene relationships, Nucleic Acids Res.2019.
 	Diseases(https://diseases.jensenlab.org/Downloads) Pletscher-Frankild S , Pallejà, Albert, Tsafou K , et al. DISEASES: Text mining and data integration of disease–gene associations， Methods, 2015.
