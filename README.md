@@ -5,21 +5,21 @@ The node and edge Prioritization based Community Analysis (ne-PCA) for NSCLC Pro
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/Outline1.png "Outline")
    
 ### 1 NSCLC seeds genes collection
-	#### 1 DisGnet(http://www.disgenet.org/downloads):158 in total   
+#### 1 DisGnet(http://www.disgenet.org/downloads):158 in total   
 	Screening："Non-Small Cell Lung Carcinoma":111  "Adenocarcinoma of lung":60
-   	#### 2 KEGG(https://www.kegg.jp/kegg/):81 in total
+#### 2 KEGG(https://www.kegg.jp/kegg/):81 in total
 	Network variation(https://www.kegg.jp/kegg-bin/show_network?id=nt06266) nt06266:44
 	PATHWAY(https://www.kegg.jp/kegg-bin/show_pathway?hsa05223+H00014) map05223:64
   	DISEASE(https://www.kegg.jp/dbget-bin/www_bget?ds:H00014) H00014:9 
-	#### 3 Cancer Gene Census(https://cancer.sanger.ac.uk/census):42 in total
+#### 3 Cancer Gene Census(https://cancer.sanger.ac.uk/census):42 in total
      	Screening："NSCLC“:37  “lung adenocarcinoma":5
-	#### 4 OMIM(https://www.omim.org/downloads):24 in total
+#### 4 OMIM(https://www.omim.org/downloads):24 in total
 	Screening："Nonsmall cell lung cancer":14  "Adenocarcinoma of lung":12 "lung adenocarcinoma":2
-	#### 5 Diseases(https://diseases.jensenlab.org/Downloads):2 in total
+#### 5 Diseases(https://diseases.jensenlab.org/Downloads):2 in total
 	Screening："non-small cell lung carcinoma":2
-	#### 6 IntAct(https://www.ebi.ac.uk/intact/downloads)：18 in total
+#### 6 IntAct(https://www.ebi.ac.uk/intact/downloads)：18 in total
 	Screening："non-small-cell lung cancer":9 "non-small cell lung cancer":4 "NSCLC":6
-	#### 7 OncoPPI(http://oncoppi.emory.edu/)：78 in total
+#### 7 OncoPPI(http://oncoppi.emory.edu/)：78 in total
 
 ### 2 Preliminary omics research
 	GSE19804 & GSE101929 (94 NSCLCs vs 92 normal samples)
