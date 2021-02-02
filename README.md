@@ -5,8 +5,8 @@ The node and edge Prioritization based Community Analysis (ne-PCA) for NSCLC Pro
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/Outline1.png "Outline")
    
 ### 1 Preliminary omics research
-	GSE19804 & GSE101929 (94 NSCLCs vs 92 normal samples)
-   	DEGs were identified respectively(588 common DEGs)
+   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/GSE.PNG "Microarray")
+#### DEGs were identified respectively:588 common DEGs
 
 ### 2 NSCLC seed genes collection
 	NSCLC seed genes were collected from seven database with different focus
