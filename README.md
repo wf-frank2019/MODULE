@@ -12,13 +12,13 @@ The node and edge Prioritization based Community Analysis (ne-PCA) for NSCLC Pro
 	NSCLC seed genes were collected from seven database with different focus
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/seeds.PNG "Seeds")
 #### details:
-#### DisGeNet(http://www.disgenet.org/downloads) Pinero J, Ramirez-Anguita JM, Sauch-Pitarch J et al. The DisGeNET knowledge platform for disease genomics: 2019 update, NU-CLEIC ACIDS RESEARCH 2020.
-#### KEGG(https://www.kegg.jp/kegg/)   Kanehisa M, Goto S. KEGG: kyoto encyclopedia of genes and genomes, NUCLEIC ACIDS RESEARCH 2000.
-#### Cancer Gene Census(https://cancer.sanger.ac.uk/census) Sondka,Z.,Bamford, S.,Cole,C.G.et al.The COSMIC Cancer Gene Census: describing genetic dysfunction across all human cancers, Nat Rev Cancer 2018.
-#### OMIM(https://www.omim.org/downloads)  Amberger JS, Bocchini CA, Scott AF, Hamosh A. OMIM.org: leveraging knowledge across phenotype-gene relationships, Nucleic Acids Res.2019.
-#### Diseases(https://diseases.jensenlab.org/Downloads) Pletscher-Frankild S , Pallejà, Albert, Tsafou K , et al. DISEASES: Text mining and data integration of disease–gene associations， Methods, 2015.
-#### IntAct(https://www.ebi.ac.uk/intact/downloads) The MIntAct project--IntAct as a common curation platform for 11 molecular interaction databases,Nucleic Acids Research, 2014.
-#### OncoPPI(http://oncoppi.emory.edu) Li,Z.,Ivanov,A.,Su,R.et al.The OncoPPi network of cancer-focused protein–protein interactions to inform biological insights and therapeutic strategies, Nat Commun 2017.
+#### DisGeNet(http://www.disgenet.org/downloads) Pinero J, Ramirez-Anguita JM, Sauch-Pitarch J et al. The DisGeNET knowledge platform for disease genomics: 2019 update,NU-CLEIC ACIDS RESEARCH 2020.
+#### KEGG(https://www.kegg.jp/kegg/)   Kanehisa M, Goto S. KEGG: kyoto encyclopedia of genes and genomes,NUCLEIC ACIDS RESEARCH 2000.
+#### Cancer Gene Census(https://cancer.sanger.ac.uk/census) Sondka,Z.,Bamford, S.,Cole,C.G.et al.The COSMIC Cancer Gene Census: describing genetic dysfunction across all human cancers,Nat Rev Cancer 2018.
+#### OMIM(https://www.omim.org/downloads)  Amberger JS, Bocchini CA, Scott AF, Hamosh A. OMIM.org: leveraging knowledge across phenotype-gene relationships,Nucleic Acids Res 2019.
+#### Diseases(https://diseases.jensenlab.org/Downloads) Pletscher-Frankild S , Pallejà, Albert, Tsafou K , et al. DISEASES: Text mining and data integration of disease–gene associations,Methods 2015.
+#### IntAct(https://www.ebi.ac.uk/intact/downloads) The MIntAct project--IntAct as a common curation platform for 11 molecular interaction databases,Nucleic Acids Research 2014.
+#### OncoPPI(http://oncoppi.emory.edu) Li,Z.,Ivanov,A.,Su,R.et al.The OncoPPi network of cancer-focused protein–protein interactions to inform biological insights and therapeutic strategies,Nat Commun 2017.
 	
 ### 3 PPIN Construction
 	Protein-protein interaction network based on STRING(https://string-db.org/)
