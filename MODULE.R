@@ -94,43 +94,43 @@ fan_LP_label_list <- list()
 for(i in 1:length(fan_LP)){
   fan_LP_label_list[[i]]<-fan_LP_label[fan_LP_label$V2==i,1]
 }#each nodes in each modules
-fan_GN_label_list<- list()
-fan_GN_label_list<-fan_GN_label_list[(lengths(fan_GN_label_list) >1)]
-fan_LP_label_list<- list()
-fan_LP_label_list<-fan_LP_label_list[(lengths(fan_LP_label_list) >1)]
-fan_GN_LP<-as.data.frame(matrix(nrow=length(fan_LP_label_list),ncol=length(fan_GN_label_list)));fan_GN_LP_union=fan_GN_LP;fan_GN_LP_phyper=fan_GN_LP
-for(i in 1:length(fan_GN_label_list)){
-  for(j in 1:length(fan_LP_label_list)){
-    fan_GN_LP[j,i]=length(intersect(fan_GN_label_list[[i]],fan_LP_label_list[[j]]))
-    fan_GN_LP_union[j,i]=length(union(fan_GN_label_list[[i]],fan_LP_label_list[[j]]))
+fan_GN_label_list2<- list()
+fan_GN_label_list2<-fan_GN_label_list[(lengths(fan_GN_label_list) >1)]
+fan_LP_label_list2<- list()
+fan_LP_label_list2<-fan_LP_label_list[(lengths(fan_LP_label_list) >1)]
+fan_GN_LP2<-as.data.frame(matrix(nrow=length(fan_LP_label_list2),ncol=length(fan_GN_label_list2)));fan_GN_LP_union2=fan_GN_LP2;fan_GN_LP_phyper2=fan_GN_LP2
+for(i in 1:length(fan_GN_label_list2)){
+  for(j in 1:length(fan_LP_label_list2)){
+    fan_GN_LP2[j,i]=length(intersect(fan_GN_label_list2[[i]],fan_LP_label_list2[[j]]))
+    fan_GN_LP_union2[j,i]=length(union(fan_GN_label_list2[[i]],fan_LP_label_list2[[j]]))
   }
 }
-for(i in 1:ncol(fan_GN_LP_phyper)){
-  for(j in 1:nrow(fan_GN_LP_phyper)){
-    fan_GN_LP_phyper[j,i]=1-phyper(fan_GN_LP[j,i],length(fan_GN_label_list[[i]]),fan_GN_LP_union[j,i],length(fan_LP_label_list[[j]]))
+for(i in 1:ncol(fan_GN_LP_phyper2)){
+  for(j in 1:nrow(fan_GN_LP_phyper2)){
+    fan_GN_LP_phyper2[j,i]=1-phyper(fan_GN_LP2[j,i],length(fan_GN_label_list2[[i]]),fan_GN_LP_union2[j,i],length(fan_LP_label_list2[[j]]))
   }
 }
-colnames(fan_GN_LP_phyper)<-paste("GN",seq(from=1,to=length(fan_GN_label_list),by=1),sep="_")
-rownames(fan_GN_LP_phyper)<-paste("LP",seq(from=1,to=length(fan_LP_label_list),by=1),sep="_")
-cormat=as.data.frame(t(fan_GN_LP_phyper))
-cormat$ID <- row.names(cormat)
-fanplot <- melt(cormat, id.vars=c("ID"))
-p_fan <- ggplot(fanplot, aes(y=variable,x=ID))+geom_tile(aes(fill=value))+ scale_fill_gradient(low = "red", high = "skyblue") +labs(x='GN',y='LPA',title='Module Differences Significance')+theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 45)) 
-sig_fan=as.data.frame(which(fan_GN_LP_phyper<0.01, arr.ind = TRUE))
-sig_fan_list<- list()
-for(i in 1:nrow(sig_fan)){
-  sig_fan_list[[i]]<-intersect(fan_GN_label_list[[sig_fan[i,2]]],fan_LP_label_list[[sig_fan[i,1]]])
+colnames(fan_GN_LP_phyper2)<-paste("GN",seq(from=1,to=length(fan_GN_label_list2),by=1),sep="_")
+rownames(fan_GN_LP_phyper2)<-paste("LP",seq(from=1,to=length(fan_LP_label_list2),by=1),sep="_")
+cormat2=as.data.frame(t(fan_GN_LP_phyper2))
+cormat2$ID <-  row.names(cormat2)
+fanplot2 <- melt(cormat2, id.vars=c("ID"))
+p_fan2 <- ggplot(fanplot2, aes(y=variable,x=ID))+geom_tile(aes(fill=value))+ scale_fill_gradient(low = "red", high = "skyblue") +labs(x='GN',y='LPA',title='Module Differences Significance')+theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 45)) 
+sig_fan2=as.data.frame(which(fan_GN_LP_phyper2<0.01, arr.ind = TRUE))
+sig_fan_list2<- list()
+for(i in 1:nrow(sig_fan2)){
+  sig_fan_list2[[i]]<-intersect(fan_GN_label_list2[[sig_fan2[i,2]]],fan_LP_label_list2[[sig_fan2[i,1]]])
 }
-for(i in 1:length(sig_fan_list))
+for(i in 1:length(sig_fan_list2))
 {
-  w=w+length(sig_fan_list[[i]])
+  w=w+length(sig_fan_list2[[i]])
 }
 modules=as.data.frame(matrix(nc=2,nr=w))
-for(i in 1:length(sig_fan_list))
+for(i in 1:length(sig_fan_list2))
 {
   w=f+1
-  f=f+length(sig_fan_list[[i]])
-  modules[w:f,1]<- unlist(sig_fan_list[[i]])
+  f=f+length(sig_fan_list2[[i]])
+  modules[w:f,1]<- unlist(sig_fan_list2[[i]])
   modules[w:f,2]<- i
 }
 write.table(modules,"modules.txt",sep="\t",quote=F,row.names=F,col.names=c("name","label"))
