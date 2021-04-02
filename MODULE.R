@@ -1,90 +1,126 @@
 ###############################
+setwd("C:/***/")
 library(igraph)
 library(dnet)
-options(scipen=200)
-nodes <- read.table("nodes.txt")
-links <- read.table("links.txt")
-net <- graph_from_data_frame(d = links,vertices = nodes,directed = F)
-Seeds<-read.table("seeds.txt")
-Seeds[1:12,1]=1
-rownames(Seeds) <- nodes[,1]
-PTmatrix_all<- dRWR(g=net, normalise="laplacian", setSeeds=Seeds, restart=0.8, parallel=FALSE) 
-result=matrix(nrow = 190, ncol = 1)
-result[,1]<-PTmatrix_all[,1]
-colnames(result)="all_Affinity"
-rownames(result)=nodes[,1]
-result<-as.data.frame(result)
-library(dplyr) # install “assertthat” first 
-result2 <- mutate(result,rn=row.names(result))
-sort<- arrange(result2,desc(all_Affinity))
-rownames(sort)<- sort$rn
-sort <- select(sort,-rn)
-write.table(sort,"allseeds_0.8_sort.txt",sep="\t",quote=F,col.names =NA)
-id2<-as.data.frame(sort[1:30,1])
-colnames(id2)="V1"
-a<-merge(id2,links,all.x=TRUE,sort=TRUE)
-links2=links
-links2[,1]<-links[,2]
-links2[,2]<-links[,1]
-b<-merge(id2,links2,all.x=TRUE,sort=TRUE)
-b2=b
-b[,1]<-b2[,2]
-b[,2]<-b2[,1]
-c<-rbind(a,b)
-c2<-c[complete.cases(c),]
-c3<-c2[!duplicated(c2, fromLast=TRUE), ]
-write.table(c3,"top10%net.txt",quote=F,sep="\t",row.names=F,col.names=F)
-bet<-edge_betweenness(net, e = E(net), directed = F) 
-bet2<-cbind(links,bet)
-colnames(c3)=("name1","name2")
-colnames(bet2)=("name1","name2","bet")
-subbet<-merge(bet2,c3,by=c("name1","name2"),sort=F)
-write.table(bet2,"edge_betweenness.txt",sep="\t",quote=F,row.names=F,col.names=F)
+library(dplyr)
 library(GOSemSim)
+library(igraph)
+library(ggplot2)
+library(reshape2)
+options(scipen=200)
+links <-read.csv("links.csv",header=T) #PPIs
+nodes <- read.csv("nodes.csv",header=T) #name,label(0/1)
+seedcount=as.numeric(length(which(nodes[,2]==1)))
+topten=ceiling((nrow(nodes)-seedcount)/10)
+g = graph_from_data_frame(links, directed=FALSE)
+Seeds=as.data.frame(matrix(nc=1,nr=vcount(g)))
+Seeds$V1=0
+rownames(Seeds) <- nodes[,1]
+Seeds[1:seedcount,1]=1
+#rwr
+result=matrix(nrow = vcount(g), ncol = seedcount)
+result<-as.data.frame(result)
+for(i in 1:seedcount)
+{
+  Seeds[1:seedcount,1]=0
+  Seeds[i,1]=1
+  PTmatrix<- dRWR(g=g, normalise="laplacian", setSeeds=Seeds, restart=0.8, parallel=FALSE) 
+  result[,i]=PTmatrix[,1]
+}
+colnames(result)=nodes[1:seedcount,1]
+rownames(result)=nodes[,1]
+result$sum=apply(result[,c(rep(1:seedcount,1))],1,sum,na.rm=T)
+result <- mutate(result,rn=row.names(result))
+result$label=0;result$label[1:6]=1
+result<- arrange(result,desc(sum))  #write.table(result,"RWR.txt",quote=F,sep="\t",col.names=NA)
+result_noseed<- result[result$label==0,]
+result_noseed<-as.data.frame(result_noseed$rn[1:topten])
+result_seed<- as.data.frame(result[result$label==1,seedcount+2])
+result_topten<-as.data.frame(union(result_seed[,1],result_noseed[,1])) #phenotype-related genes
+colnames(result_topten)="V1";colnames(links)=c("V1","V2")
+temp1<-merge(result_topten,links,all.x=TRUE,sort=TRUE)
+temp2=links
+temp2[,1]<-links[,2]
+temp2[,2]<-links[,1]
+temp3<-merge(result_topten,temp2,all.x=TRUE,sort=TRUE)
+temp4=temp3
+temp3[,1]<-temp4[,2]
+temp3[,2]<-temp4[,1]
+temp5<-rbind(temp1,temp3)
+temp6<-temp5[complete.cases(temp5),]
+coreNet<-temp6[!duplicated(temp6, fromLast=TRUE), ] #write.table(coreNet,"coreNet.txt",quote=F,sep="\t",row.names=F,col.names=F)
+#TFC
+bet<-edge_betweenness(g, e = E(g), directed = F)
+bet<-cbind(links,bet)
+colnames(coreNet)=c("name1","name2");colnames(bet)=c("name1","name2","bet")
+subbet<-merge(bet,coreNet,by=c("name1","name2"),sort=F)  #core NET edge bet
 hsGO2 <- godata('org.Hs.eg.db', keytype = "SYMBOL", ont="BP", computeIC=FALSE)
-aa<-mgeneSim(nodes[,1], semData=hsGO2, measure="Wang", combine="BMA", verbose=FALSE)
-ut <- upper.tri(aa) 
-test<-data.frame(row = rownames(aa)[row(aa)[ut]],column = rownames(aa)[col(aa)[ut]], cor =(aa)[ut] )  
-test2=test
-test2[,1]=test[,2]
-test2[,2]=test[,1]
-bind<-rbind(test,test2)
-GOnet<-merge(bind,c3,by=c("name1","name2"),sort=F)  
-data<-merge(GOnet,subbet,by=c("name1","name2"),sort=F) 
-k1 = 99/(max(data$GO)-min(data$GO))
-data[,5]=1+k1*(data$GO-min(data$GO))
-colnames(data)[5]="GO1_100"
-k2 = 99/(max(data$bet)-min(data$bet))
-data[,6]=1+k2*(data$bet-min(data$bet))
-colnames(data)[6]="bet1_100"
-data[,7]=data$GO1_100+data$bet1_100
-colnames(data)[7]="sumgobet"
-g = graph_from_data_frame(data, directed=FALSE)
-E(g)$weight = data$sumgobet
-GN<-edge.betweenness.community(g,weights = E(g)$weight)
-RW<-walktrap.community(g,weights = E(g)$weight)
-LP<-label.propagation.community(g,weights=E(g)$weight)
-SG<-spinglass.community(g,weights=E(g)$weight)
-write.table(GN$membership,"top10%GN.txt",sep="\t",quote=F,col.names="community",row.names=get.vertex.attribute(g)[[1]])
-write.table(RW$membership,"top10%RW.txt",sep="\t",quote=F,col.names="community",row.names=get.vertex.attribute(g)[[1]]) 
-write.table(LP$membership,"top10%LP.txt",sep="\t",quote=F,col.names="community",row.names=get.vertex.attribute(g)[[1]])
-write.table(SG$membership,"top10%SG.txt",sep="\t",quote=F,col.names="community",row.names=get.vertex.attribute(g)[[1]])
-module<-read.table("top10%net.txt",header=F) 
-m1<-read.table("top10%GN.txt") 
-m1<-m1[-1,]
-m11<-m1[m1$V2==1,]   
-m1<-as.data.frame(m11[,1])
-colnames(m1)="V1"
-aa<-merge(m1,module,all.x=TRUE,sort=TRUE) 
-module2=module
-module2[,1]<-module[,2]
-module2[,2]<-module[,1]
-bb<-merge(m1,module2,all.x=TRUE,sort=TRUE)
-bb2=bb
-bb[,1]<-bb2[,2]
-bb[,2]<-bb2[,1]
-cc<-rbind(aa,bb)
-cc2<-cc[complete.cases(cc),] 
-cc3<-cc2[!duplicated(cc2, fromLast=TRUE), ]
-write.table(cc3,"top10%GN_m1.txt",sep="\t",quote=F,row.names=F,col.names=c("name1","name2"))
-###############################
+temp7<-mgeneSim(nodes[,1], semData=hsGO2, measure="Wang", combine="BMA", verbose=FALSE)
+temp8 <- upper.tri(temp7)
+temp9<-data.frame(row = rownames(temp7)[row(temp7)[temp8]],column = rownames(temp7)[col(temp7)[temp8]], cor =(temp7)[temp8] ) 
+temp10=temp9
+temp10[,1]=temp9[,2]
+temp10[,2]=temp9[,1]
+temp11<-rbind(temp9,temp10);colnames(temp11)=c("name1","name2","cor")
+subGO<-merge(temp11,coreNet,by=c("name1","name2"),sort=F)
+temp12=dplyr::anti_join(subbet[,1:2], subGO[,1:2],by = c("name1", "name2"))
+temp12$cor=0
+subGO=rbind(subGO,temp12)
+subNET=merge(subGO,subbet,by=c("name1","name2"))
+subNET$scaleTN <- (subNET$bet-min(subNET$bet))/(max(subNET$bet)-min(subNET$bet))
+subNET$TFC  <- 100*(subNET$scaleTN+subNET$cor)/(2-subNET$scaleTN-subNET$cor) #write.table(subNET,"WCN.txt",sep="\t",quote=F,row.names=F)
+#modules please remove outliers in advance
+fan=subNET[,1:2];fan$TFC=subNET$TFC
+g_fan = graph_from_data_frame(fan, directed=FALSE) #E(g_fan)$weight = fan$TFC
+fan_GN<-cluster_edge_betweenness(g_fan,weights=NULL) #sizes(fan_GN) view quantity
+fan_LP<-cluster_louvain(g_fan,weights=NULL)  
+fan_GN_label=matrix(nrow = length(get.vertex.attribute(g_fan)[[1]]), ncol = 2)
+fan_GN_label<-as.data.frame(fan_GN_label)
+fan_GN_label[,1]=get.vertex.attribute(g_fan)[[1]]
+fan_GN_label[,2]=fan_GN$membership
+fan_LP_label=matrix(nrow = length(get.vertex.attribute(g_fan)[[1]]), ncol = 2)
+fan_LP_label<-as.data.frame(fan_LP_label)
+fan_LP_label[,1]=get.vertex.attribute(g_fan)[[1]]
+fan_LP_label[,2]=fan_LP$membership
+#write.table(fan_GN_label,"./module/WCN_GN.txt",sep="\t",quote=F,row.names=F)
+#write.table(fan_LP_label,"./module/WCN_LP.txt",sep="\t",quote=F,row.names=F)
+fan_GN_label_list <- list()
+for(i in 1:length(fan_GN)){
+  fan_GN_label_list[[i]]<-fan_GN_label[fan_GN_label$V2==i,1]
+}
+fan_LP_label_list <- list()
+for(i in 1:length(fan_LP)){
+  fan_LP_label_list[[i]]<-fan_LP_label[fan_LP_label$V2==i,1]
+}#each nodes in each modules
+fan_GN_label_list<- list()
+fan_GN_label_list<-fan_GN_label_list[(lengths(fan_GN_label_list) >1)]
+fan_LP_label_list<- list()
+fan_LP_label_list<-fan_LP_label_list[(lengths(fan_LP_label_list) >1)]
+fan_GN_LP<-as.data.frame(matrix(nrow=length(fan_LP_label_list),ncol=length(fan_GN_label_list)));fan_GN_LP_union=fan_GN_LP;fan_GN_LP_phyper=fan_GN_LP
+for(i in 1:length(fan_GN_label_list)){
+  for(j in 1:length(fan_LP_label_list)){
+    fan_GN_LP[j,i]=length(intersect(fan_GN_label_list[[i]],fan_LP_label_list[[j]]))
+    fan_GN_LP_union[j,i]=length(union(fan_GN_label_list[[i]],fan_LP_label_list[[j]]))
+  }
+}
+for(i in 1:ncol(fan_GN_LP_phyper)){
+  for(j in 1:nrow(fan_GN_LP_phyper)){
+    fan_GN_LP_phyper[j,i]=1-phyper(fan_GN_LP[j,i],length(fan_GN_label_list[[i]]),fan_GN_LP_union[j,i],length(fan_LP_label_list[[j]]))
+  }
+}
+colnames(fan_GN_LP_phyper)<-paste("GN",seq(from=1,to=length(fan_GN_label_list),by=1),sep="_")
+rownames(fan_GN_LP_phyper)<-paste("LP",seq(from=1,to=length(fan_LP_label_list),by=1),sep="_")
+cormat=as.data.frame(t(fan_GN_LP_phyper))
+cormat$ID <- row.names(cormat)
+fanplot <- melt(cormat, id.vars=c("ID"))
+p_fan <- ggplot(fanplot, aes(y=variable,x=ID))+geom_tile(aes(fill=value))+ scale_fill_gradient(low = "red", high = "skyblue") +labs(x='GN',y='LPA',title='Module Differences Significance')+theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 45)) 
+sig_fan=as.data.frame(which(fan_GN_LP_phyper<0.01, arr.ind = TRUE))
+sig_fan_list<- list()
+for(i in 1:nrow(sig_fan)){
+  sig_fan_list[[i]]<-intersect(fan_GN_label_list[[sig_fan[i,2]]],fan_LP_label_list[[sig_fan[i,1]]])
+}
+modules<-  file("./modules.txt", open = "w") #create modules.txt in direaction
+for(i in 1:nrow(sig_fan)){
+  write.table(sig_fan_list[[i]], file = modules, quote = FALSE, sep = "\t")
+}
+close(modules)
