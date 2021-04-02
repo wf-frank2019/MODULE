@@ -1,5 +1,5 @@
 ###############################
-setwd("C:/***/")
+setwd("*:/***/")
 library(igraph)
 library(dnet)
 library(dplyr)
@@ -8,6 +8,8 @@ library(igraph)
 library(ggplot2)
 library(reshape2)
 options(scipen=200)
+i=j=1
+w=f=0
 links <-read.csv("links.csv",header=T) #PPIs
 nodes <- read.csv("nodes.csv",header=T) #name,label(0/1)
 seedcount=as.numeric(length(which(nodes[,2]==1)))
@@ -119,8 +121,17 @@ sig_fan_list<- list()
 for(i in 1:nrow(sig_fan)){
   sig_fan_list[[i]]<-intersect(fan_GN_label_list[[sig_fan[i,2]]],fan_LP_label_list[[sig_fan[i,1]]])
 }
-modules<-  file("./modules.txt", open = "w") #create modules.txt in direaction
-for(i in 1:nrow(sig_fan)){
-  write.table(sig_fan_list[[i]], file = modules, quote = FALSE, sep = "\t")
+for(i in 1:length(sig_fan_list))
+{
+  w=w+length(sig_fan_list[[i]])
 }
-close(modules)
+modules=as.data.frame(matrix(nc=2,nr=w))
+for(i in 1:length(sig_fan_list))
+{
+  w=f+1
+  f=f+length(sig_fan_list[[i]])
+  modules[w:f,1]<- unlist(sig_fan_list[[i]])
+  modules[w:f,2]<- i
+}
+write.table(modules,"modules.txt",sep="\t",quote=F,row.names=F,col.names=c("name","label"))
+###############################
