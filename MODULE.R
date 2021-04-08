@@ -33,7 +33,7 @@ colnames(result)=nodes[1:seedcount,1]
 rownames(result)=nodes[,1]
 result$sum=apply(result[,c(rep(1:seedcount,1))],1,sum,na.rm=T)
 result <- mutate(result,rn=row.names(result))
-result$label=0;result$label[1:6]=1
+result$label=0;result$label[1:seedcount]=1
 result<- arrange(result,desc(sum))  #write.table(result,"RWR.txt",quote=F,sep="\t",col.names=NA)
 result_noseed<- result[result$label==0,]
 result_noseed<-as.data.frame(result_noseed$rn[1:topten])
