@@ -14,7 +14,7 @@ links <-read.csv("links.csv",header=T) #PPIs
 nodes <- read.csv("nodes.csv",header=T) #name,label(0/1)
 seedcount=as.numeric(length(which(nodes[,2]==1)))
 topten=ceiling((nrow(nodes)-seedcount)/10)
-g = graph_from_data_frame(links, directed=FALSE)
+g <- graph_from_data_frame(d = links,vertices = nodes,directed = F)
 Seeds=as.data.frame(matrix(nc=1,nr=vcount(g)))
 Seeds$V1=0
 rownames(Seeds) <- nodes[,1]
