@@ -1,5 +1,5 @@
 # COMMUNITY DETECTION
-The node and edge Prioritization based Community Analysis (ne.PCA) for Protein-Protein Interaction Network 
+The node and edge Prioritization based Community Analysis (ne.PCA) for Protein-Protein Interaction Network
 https://www.mdpi.com/2073-4409/10/2/402
 
 ##  Usage
