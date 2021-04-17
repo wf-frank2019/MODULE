@@ -12,7 +12,7 @@ ref: https://www.mdpi.com/2073-4409/10/2/402
 	# If you wanna identify key biological network components and robust modules, just type：
 	ne.PCA(nodes,edges)
 
-##  Overall Presentation
+##  Overall Presentation(example:NSCLC)
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/overview.PNG "Outline")
    
 ### 1 Preliminary omics research
