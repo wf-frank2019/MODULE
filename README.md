@@ -3,11 +3,13 @@ The node and edge Prioritization based Community Analysis (ne.PCA) for NSCLC Pro
 https://www.mdpi.com/2073-4409/10/2/402
 
 ##  Usage
-	#install.packages("devtools")
+	# install.packages("devtools")
 	library(devtools)
 	devtools::install_github("wf-frank2019/ne.PCA")
-	library(ne.PCA)
-	#Five functions：qc.DEGs; RWRs.CN; TFCs; MODULEs; ne.PCA
+	library(ne.PCA) 
+	# ?** or help("**") for description of five functions：qc.DEGs();RWRs.CN();TFCs();MODULEs();ne.PCA() 
+	# If you wanna identify key biological network components and robust modules, just type：
+	ne.PCA(nodes,edges)
 
 ##  Overall Presentation
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/Outline1.png "Outline")
