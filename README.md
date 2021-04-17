@@ -1,6 +1,10 @@
 # COMMUNITY DETECTION
-The node and edge Prioritization based Community Analysis (ne-PCA) for NSCLC Protein-Protein Interaction Network 
+The node and edge Prioritization based Community Analysis (ne.PCA) for NSCLC Protein-Protein Interaction Network 
 https://www.mdpi.com/2073-4409/10/2/402
+
+##  Usage
+	library(devtools)
+	devtools::install_github("wf-frank2019/ne.PCA")
 
 ##  Overall Presentation
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/Outline1.png "Outline")
