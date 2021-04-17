@@ -12,7 +12,7 @@ https://www.mdpi.com/2073-4409/10/2/402
 	ne.PCA(nodes,edges)
 
 ##  Overall Presentation
-   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/Outline1.png "Outline")
+   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/overview.PNG "Outline")
    
 ### 1 Preliminary omics research
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/GSE.PNG "Microarray")
