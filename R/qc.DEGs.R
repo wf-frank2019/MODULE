@@ -52,6 +52,7 @@ qc.DEGs<- function(expr,
   }
   time1<-Sys.time()
   expr.q <- as.numeric(quantile(expr, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
+  contrName=(deparse(substitute(group)))
   if(lowEXP>=expr.q[2])
   {
     #Control low quality value cutoff to be less than the first quartile
@@ -85,7 +86,6 @@ qc.DEGs<- function(expr,
   write.table(expr,"Pre_expr.txt",sep="\t",quote=F,col.names = NA)
   message("Data pretreatment is complete !",collapse = "")
   #Difference analysis in limma
-  contrName=(deparse(substitute(group)))
   sample_label <- model.matrix(~0+factor(group[,2]))
   colnames(sample_label)=levels(factor(group[,2]))
   rownames(sample_label)=colnames(expr)
