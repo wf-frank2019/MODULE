@@ -85,6 +85,7 @@ qc.DEGs<- function(expr,
   write.table(expr,"Pre_expr.txt",sep="\t",quote=F,col.names = NA)
   message("Data pretreatment is complete !",collapse = "")
   #Difference analysis in limma
+  contrName=(deparse(substitute(group)))
   sample_label <- model.matrix(~0+factor(group[,2]))
   colnames(sample_label)=levels(factor(group[,2]))
   rownames(sample_label)=colnames(expr)
