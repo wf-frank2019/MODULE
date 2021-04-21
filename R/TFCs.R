@@ -80,7 +80,7 @@ TFCs <- function(edges) {
   #Time-consuming feedback
   time2<-Sys.time()
   message("", appendLF = T)
-  message(paste(c("You start at ", as.character(time1)), collapse = ""), appendLF = T)
-  message(paste(c("You finish at ", as.character(time2)), collapse = ""), appendLF = T)
+  message(paste(c("TFCs start at ", as.character(time1)), collapse = ""), appendLF = T)
+  message(paste(c("TFCs finish at ", as.character(time2)), collapse = ""), appendLF = T)
   message("", appendLF = T)
 }
