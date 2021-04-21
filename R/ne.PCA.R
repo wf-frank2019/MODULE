@@ -54,14 +54,14 @@ ne.PCA <- function(nodes,
       tarM$RTFC=rank(-tarM$Avg.TFC)
     }
     tarM$Drugable=tarM$RC+tarM$RP+tarM$RTFC
-    message("****************************************", appendLF = T)
+    message("***********************************************", appendLF = T)
     message(paste(c("Largest number of drug targets is: Module ",
                     tarM[which(tarM$RC==1),1]), collapse = ""), appendLF = T)
     message(paste(c("Highest drug targets proportion is: Module ",
                     tarM[which(tarM$RP==1),1]), collapse = ""), appendLF = T)
     message(paste(c("Potential drug target area is: Module ",
                     tarM[which.min(tarM$Drugable),1]), collapse = ""),appendLF = T)
-    message("****************************************", appendLF = T)
+    message("***********************************************", appendLF = T)
     write.table(tarM[,1:4],"Modules_druGable.txt",sep="\t",quote=F,row.names=F)
   }
 }
