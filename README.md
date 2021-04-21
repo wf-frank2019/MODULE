@@ -9,7 +9,7 @@ ref: https://www.mdpi.com/2073-4409/10/2/402
 	library(ne.PCA) 
 	# ? or help(" ") for description of five functions：qc.DEGs();RWRs.CN();TFCs();MODULEs();ne.PCA() 
 	
-	# If you wanna identify key biological network components and robust modules, just type：
+	# If you wanna identify key biological network nodes or edges or modules as well as drugability prediction, just type：
 	ne.PCA(nodes,edges)
 
 ##  Overall Presentation
