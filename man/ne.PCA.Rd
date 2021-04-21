@@ -4,7 +4,7 @@
 \alias{ne.PCA}
 \title{ne.PCA function}
 \usage{
-ne.PCA(nodes, edges, r = 0.8, core = 10)
+ne.PCA(nodes, edges, r = 0.8, core = 10, druGet = TRUE)
 }
 \arguments{
 \item{nodes}{data.frame, two columns:object,label(0:candidates/1:seeds).}
@@ -14,6 +14,8 @@ ne.PCA(nodes, edges, r = 0.8, core = 10)
 \item{r}{default 0.8,Restart probability of random walk,interval is (0,1).}
 
 \item{core}{default 10,Top percentile of ranking for object,interval is (0,100].}
+
+\item{druGet}{TRUE or FALSE,default TRUE,module drugability statistics and prediction will implement if druGet=TRUE.}
 }
 \description{
 Node and edge Prioritization-based Community Analysis framework

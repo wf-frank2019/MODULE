@@ -2,13 +2,15 @@
 #'
 #' @title MODULEs function
 #' @param edges data.frame, two columns:interactorA,interactorB(for example 'PPI').
-#' @param heatmap Default TRUE,heatmap of modules difference will plot if heatmap=FALSE
+#' @param heatmap Default TRUE,heatmap of modules difference will not plot if heatmap=FALSE.
+#' @param tarGet Default TRUE,module drug target statistics will not Implement if tarGet=FALSE.
 #' @import igraph ggplot2 reshape2
 #' @export MODULEs
 #' @author Fan Wang
 
 MODULEs <- function(edges,
-                    heatmap=TRUE) {
+                    heatmap=TRUE,
+                    tarGet=TRUE) {
   #check the format of parameters
   if(!class(edges) == "data.frame")
   {
@@ -23,8 +25,9 @@ MODULEs <- function(edges,
                       TP53,KRAS
                       EGFR,KRAS")
   }
+  time1<-Sys.time()
   w=f=0
-  options(scipen=200)
+  options(warn=-1)
   #Create the network
   g_fan = graph_from_data_frame(edges, directed=FALSE)
   #Objects clustering in different directions
@@ -125,6 +128,30 @@ MODULEs <- function(edges,
   #Export module label of interactions
   write.table(patternM,"edge_Module.txt",sep="\t",quote=F,row.names=F,
               col.names=c("name1","name2","module"))
+  if(tarGet){
+    TTD_tarInfor=as.data.frame(readLines(
+    'http://db.idrblab.net/ttd/sites/default/files/ttd_database/P1-01-TTD_target_download.txt'))
+    tarM=as.data.frame(matrix(nc=3,nr=length(sig_fan_list)))
+    tarM[,1]=1:length(sig_fan_list)
+    tarmodules=modules
+    tarmodules$tars=0
+    for(i in 1:nrow(modules))
+    {
+      if(any(grep(paste(modules[i,1],"_HUMAN",sep=''),TTD_tarInfor[,1]))) tarmodules$tars[i]=1
+    }
+    for(i in 1:nrow(tarM))
+    {
+      tarM[i,2]<-sum(tarmodules[which(tarmodules[,2]==i),3])
+      tarM[i,3]<-tarM[i,2]/(length(modules[which(modules[,2]==i),1]))
+    }
+    write.table(tarM,"Modules_druGable.txt",sep="\t",quote=F,row.names=F,
+                col.names=c("Module","Targets_Count","Targets_Proportion"))
+  }
+  time2<-Sys.time()
+  message("", appendLF = T)
+  message(paste(c("MODULEs start at ", as.character(time1)), collapse = ""), appendLF = T)
+  message(paste(c("MODULEs finish at ", as.character(time2)), collapse = ""), appendLF = T)
+  message("", appendLF = T)
   if(heatmap){
     #ggsave(p_fan,filename = "***.pdf")
     return(p_fan)

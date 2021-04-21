@@ -4,12 +4,14 @@
 \alias{MODULEs}
 \title{MODULEs function}
 \usage{
-MODULEs(edges, heatmap = TRUE)
+MODULEs(edges, heatmap = TRUE, tarGet = TRUE)
 }
 \arguments{
 \item{edges}{data.frame, two columns:interactorA,interactorB(for example 'PPI').}
 
-\item{heatmap}{Default TRUE,heatmap of modules difference will plot if heatmap=FALSE}
+\item{heatmap}{Default TRUE,heatmap of modules difference will not plot if heatmap=FALSE.}
+
+\item{tarGet}{Default TRUE,module drug target statistics will not Implement if tarGet=FALSE.}
 }
 \description{
 Identify robust modules from a certain network

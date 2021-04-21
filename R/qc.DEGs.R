@@ -83,10 +83,16 @@ qc.DEGs<- function(expr,
                   as.character(nrow(expr)), collapse = "")))
   #Export data after pretreatment
   write.table(expr,"Pre_expr.txt",sep="\t",quote=F,col.names = NA)
+  message("Data pretreatment is complete !",collapse = "")
   #Difference analysis in limma
+  contrName=(deparse(substitute(group)))
   sample_label <- model.matrix(~0+factor(group[,2]))
   colnames(sample_label)=levels(factor(group[,2]))
   rownames(sample_label)=colnames(expr)
+  if(!contrName=="group")
+  {
+    message(" Error! Please rename second input parameter as 'group'",collapse = "")
+  }
   de.matrix<-makeContrasts(paste0(unique(group[,2]),collapse = "-"),levels = sample_label)
   de.model <- lmFit(expr,sample_label)
   de.model2 <- contrasts.fit(de.model,de.matrix)

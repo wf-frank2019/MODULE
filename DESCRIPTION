@@ -4,7 +4,7 @@ Title: The node and edge Prioritization based Community Analysis framework
 Version: 0.1.0
 Author: FAN WANG
 Maintainer: Fan Wang <justin15751821901@gmail.com>
-Description: Data pretreatment and identification of biological network components and modules
+Description: Data pretreatment and identification of biological network components and drug target modules
 Imports:
   limma,
   Hmisc,
