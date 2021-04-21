@@ -52,6 +52,7 @@ qc.DEGs<- function(expr,
   }
   time1<-Sys.time()
   expr.q <- as.numeric(quantile(expr, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
+  contrName=(deparse(substitute(group)))
   if(lowEXP>=expr.q[2])
   {
     #Control low quality value cutoff to be less than the first quartile
