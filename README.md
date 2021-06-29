@@ -3,6 +3,7 @@ The node and edge Prioritization based Community Analysis (ne.PCA) for Protein-P
 ref: https://www.mdpi.com/2073-4409/10/2/402
 
 ##  Usage
+	# version 3.6 for check
 	# install.packages("devtools")
 	library(devtools)
 	devtools::install_github("wf-frank2019/ne.PCA")
