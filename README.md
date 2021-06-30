@@ -40,7 +40,7 @@ ref: https://www.mdpi.com/2073-4409/10/2/402
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/git2.PNG "PPN_WCN")
 
 ### 4 Communities
-	Communities are detected by GN_LPA Model
+	Community Network Overview
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/community.PNG "Module")
 
 
