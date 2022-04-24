@@ -1,6 +1,5 @@
 # COMMUNITY DETECTION
 The node and edge Prioritization based Community Analysis (ne.PCA) for Protein-Protein Interaction Network<br>
-ref: https://www.mdpi.com/2073-4409/10/2/402
 
 ##  Usage
 	# version 3.6.0 for check
@@ -16,6 +15,7 @@ ref: https://www.mdpi.com/2073-4409/10/2/402
 
 ##  Overall Presentation
 ### NSCLC for example
+	ref: https://www.mdpi.com/2073-4409/10/2/402
    ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/overview.PNG "Outline")
    
 ### 1 Preliminary omics research
