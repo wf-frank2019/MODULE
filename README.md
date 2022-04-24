@@ -9,7 +9,7 @@ ref: https://www.mdpi.com/2073-4409/10/2/402
 	devtools::install_github("wf-frank2019/ne.PCA")
 	library(ne.PCA)
 	# ? or help(" ") for description of five functions：qc.DEGs();RWRs.CN();TFCs();MODULEs();ne.PCA()
-	![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/helpR.png "Help Page")
+   ![frank](https://github.com/wf-frank2019/-storehouse/blob/master/res/helpR.png "Help Page")
 	# If you wanna identify key biological network nodes or edges or modules as well as drugability prediction, just type：
 	ne.PCA(nodes,edges)
 
